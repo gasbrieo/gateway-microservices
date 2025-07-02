@@ -5,6 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("yarp.json", optional: false, reloadOnChange: true);
 
+builder.Configuration
+    .AddJsonFile("yarp.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"yarp.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
 builder.Host.UseSerilogWithDefaults();
 
 builder.Services.AddSwaggerGenWithAuth();
