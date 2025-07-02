@@ -1,4 +1,4 @@
-namespace UsersService.Web.Extensions;
+namespace Gateway.Web.Extensions;
 
 public static class SerilogExtensions
 {

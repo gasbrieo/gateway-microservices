@@ -24,11 +24,13 @@ group.MapGet("/ping", (HttpContext context) =>
 {
     var userId = context.Request.Headers["X-User-Id"].FirstOrDefault() ?? "anonymous";
     var role = context.Request.Headers["X-User-Role"].FirstOrDefault() ?? "none";
+    var correlationId = context.Request.Headers["X-Correlation-Id"].FirstOrDefault() ?? "none";
 
     return Results.Ok(new
     {
         service = "UserService",
         message = "pong",
+        correlationId,
         userId,
         role
     });

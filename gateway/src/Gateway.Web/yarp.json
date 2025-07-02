@@ -1,0 +1,56 @@
+{
+    "YARP": {
+        "Routes": {
+            "userServiceV1": {
+                "ClusterId": "userServiceV1",
+                "Match": {
+                    "Path": "/api/v1/users/{**catch-all}"
+                },
+                "Transforms": [
+                    { "PathRemovePrefix": "/api/v1/users" }
+                ]
+            },
+            "metricsServiceV1": {
+                "ClusterId": "metricsServiceV1",
+                "Match": {
+                    "Path": "/api/v1/metrics/{**catch-all}"
+                },
+                "Transforms": [
+                    { "PathRemovePrefix": "/api/v1/metrics" }
+                ]
+            },
+            "reportsServiceV1": {
+                "ClusterId": "reportsServiceV1",
+                "Match": {
+                    "Path": "/api/v1/reports/{**catch-all}"
+                },
+                "Transforms": [
+                    { "PathRemovePrefix": "/api/v1/reports" }
+                ]
+            }
+        },
+        "Clusters": {
+            "userServiceV1": {
+                "Destinations": {
+                    "d1": {
+                        "Address": "http://localhost:6000/api/v1/"
+                    }
+                }
+            },
+            "metricsServiceV1": {
+                "Destinations": {
+                    "d1": {
+                        "Address": "http://localhost:7000/api/v1/"
+                    }
+                }
+            },
+            "reportsServiceV1": {
+                "Destinations": {
+                    "d1": {
+                        "Address": "http://localhost:8000/api/v1/"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -16,6 +16,7 @@ public static class SwaggerExtensions
             document.Version = "v1";
             document.ApiGroupNames = ["v1"];
             document.OperationProcessors.Add(new AddUserHeadersProcessor());
+            document.OperationProcessors.Add(new AddCorrelationHeadersProcessor());
         });
 
         return services;
@@ -60,6 +61,23 @@ public class AddUserHeadersProcessor : IOperationProcessor
             Kind = OpenApiParameterKind.Header,
             Type = NJsonSchema.JsonObjectType.String,
             Description = "User role",
+            IsRequired = false
+        });
+
+        return true;
+    }
+}
+
+public class AddCorrelationHeadersProcessor : IOperationProcessor
+{
+    public bool Process(OperationProcessorContext context)
+    {
+        context.OperationDescription.Operation.Parameters.Add(new OpenApiParameter
+        {
+            Name = "X-Correlation-Id",
+            Kind = OpenApiParameterKind.Header,
+            Type = NJsonSchema.JsonObjectType.String,
+            Description = "Correlation ID",
             IsRequired = false
         });
 
